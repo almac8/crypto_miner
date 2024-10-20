@@ -1,0 +1,9 @@
+#UI {
+  background-color: olive;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 16rem;
+  height: 100%;
+}
