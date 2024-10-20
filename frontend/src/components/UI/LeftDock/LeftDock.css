@@ -1,0 +1,6 @@
+#LeftDock {
+  display: flex;
+  flex-flow: nowrap column;
+  justify-content: flex-start;
+  align-items: center;
+}

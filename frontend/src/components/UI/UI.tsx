@@ -1,9 +1,14 @@
 import "./UI.css";
+import LeftDock from "./LeftDock/LeftDock";
+import RightDock from "./RightDock/RightDock";
 
-const UI = () => (
-  <div id="UI">
-    <h1>UI</h1>
-  </div>
-);
+const UI = () => {
+  return (
+    <div id="UI">
+      <LeftDock />
+      <RightDock />
+    </div>
+  )
+};
 
 export default UI;

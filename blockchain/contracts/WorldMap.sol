@@ -5,6 +5,6 @@ contract WorldMap {
   uint public worldSize;
 
   constructor() {
-    worldSize = 4;
+    worldSize = 2;
   }
 }
