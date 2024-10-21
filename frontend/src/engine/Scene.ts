@@ -8,18 +8,23 @@ class Scene {
     });
   }
 
-  update(deltatime: number) {}
+  update(deltatime: number) {
+    sceneData.clickEvents.forEach(ce => {
+      console.log(`X: ${ ce.position.x }, Y: ${ ce.position.y }`);
+    });
+
+    sceneData.setClickEvents([]);
+  }
 
   render() {
     if(sceneData.renderingContext) {
       const worldSize = sceneData.worldSize;
 
       for(let i = 0; i < worldSize; i++) {
-        const screenWidth = sceneData.renderingContext.canvas.width;
-        const screenHeight = sceneData.renderingContext.canvas.height;
+        const canvasDimentions = sceneData.canvasDimentions;
 
-        const x = (screenWidth / worldSize * i) + screenWidth / worldSize / 2;
-        const y = screenHeight / 2;
+        const x = (canvasDimentions.x / worldSize * i) + canvasDimentions.x / worldSize / 2;
+        const y = canvasDimentions.y / 2;
 
         sceneData.renderingContext.beginPath();
         sceneData.renderingContext.fillStyle = "olive";

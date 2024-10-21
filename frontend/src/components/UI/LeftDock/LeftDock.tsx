@@ -13,6 +13,7 @@ const LeftDock = () => {
     onMouseEnter={ () => setIsOpen(true) }
     onMouseLeave={ () => setIsOpen(false) }>
       {isOpen && <h1>World Size: { sceneDataContext.worldSize }</h1>}
+      {isOpen && sceneDataContext.selectedCell !== undefined && <p>Selected Cell: { sceneDataContext.selectedCell }</p>}
     </div>
   );
 };
