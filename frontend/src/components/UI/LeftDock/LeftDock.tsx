@@ -12,7 +12,7 @@ const LeftDock = () => {
     className={ isOpen ? "UI_Dock_Open" : "UI_Dock_Closed" }
     onMouseEnter={ () => setIsOpen(true) }
     onMouseLeave={ () => setIsOpen(false) }>
-      {isOpen && <h1>World Size: { sceneDataContext.worldSize }</h1>}
+      {isOpen && <p>World Dimentions: ({ sceneDataContext.worldSize.x }, { sceneDataContext.worldSize.y })</p>}
       {isOpen && sceneDataContext.selectedCell !== undefined && <p>Selected Cell: { sceneDataContext.selectedCell }</p>}
     </div>
   );

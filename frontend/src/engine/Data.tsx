@@ -15,8 +15,8 @@ type SceneData = {
   clickEvents: ClickEvent[],
   setClickEvents: Dispatch<SetStateAction<ClickEvent[]>>,
 
-  worldSize: number,
-  setWorldSize: Dispatch<SetStateAction<number>>,
+  worldDimentions: Vector2,
+  setWorldDimentions: Dispatch<SetStateAction<Vector2>>,
   
   selectedCell: number | undefined,
   setSelectedCell: Dispatch<SetStateAction<number | undefined>>
@@ -39,8 +39,8 @@ let sceneData: SceneData = {
   clickEvents: [] as ClickEvent[],
   setClickEvents: () => {},
 
-  worldSize: 0,
-  setWorldSize: () => {},
+  worldDimentions: new Vector2(),
+  setWorldDimentions: () => {},
 
   selectedCell: undefined,
   setSelectedCell: () => {}
@@ -53,7 +53,7 @@ const SceneDataProvider = (props: SceneDataProviderProps) => {
   const [ canvasDimentions, setCanvasDimentions ] = useState<Vector2>(new Vector2());
   const [ mousePosition, setMousePosition ] = useState<Vector2>(new Vector2());
   const [ clickEvents, setClickEvents ] = useState<ClickEvent[]>([] as ClickEvent[]);
-  const [ worldSize, setWorldSize ] = useState<number>(0);
+  const [ worldDimentions, setWorldDimentions ] = useState<Vector2>(new Vector2());
   const [ selectedCell, setSelectedCell ] = useState<number | undefined>(undefined);
 
   sceneData.renderingContext = renderingContext;
@@ -68,8 +68,8 @@ const SceneDataProvider = (props: SceneDataProviderProps) => {
   sceneData.clickEvents = clickEvents;
   sceneData.setClickEvents = setClickEvents;
 
-  sceneData.worldSize = worldSize;
-  sceneData.setWorldSize = setWorldSize;
+  sceneData.worldDimentions = worldDimentions;
+  sceneData.setWorldDimentions = setWorldDimentions;
 
   sceneData.selectedCell = selectedCell;
   sceneData.setSelectedCell = setSelectedCell;
@@ -80,7 +80,7 @@ const SceneDataProvider = (props: SceneDataProviderProps) => {
       canvasDimentions, setCanvasDimentions,
       mousePosition, setMousePosition,
       clickEvents, setClickEvents,
-      worldSize, setWorldSize,
+      worldDimentions, setWorldDimentions,
       selectedCell, setSelectedCell }}>
       { props.children }
     </SceneDataContext.Provider>
