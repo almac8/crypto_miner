@@ -27,14 +27,8 @@ contract WorldMap {
   function getMinableValue(uint x, uint y) public view returns(uint){
     return values[x][y];
   }
-  
-/* 
-  function minableValue(uint cellIndex) public view returns(uint) {
-    return values[cellIndex];
-  }
 
-  function mineCell(uint cellIndex) public {
-    values[cellIndex] -= 1;
+  function mineTile(uint x, uint y) public {
+    values[x][y] -= 1;
   }
-   */
 }

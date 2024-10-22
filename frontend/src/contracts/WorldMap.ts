@@ -1,4 +1,4 @@
-import { createPublicClient, getContract, http } from "viem";
+import { createPublicClient, createWalletClient, custom, getContract, http } from "viem";
 import { localhost } from "viem/chains";
 
 const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
@@ -55,6 +55,24 @@ const worldMapABI = [
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "x",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "y",
+        "type": "uint256"
+      }
+    ],
+    "name": "mineTile",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   }
 ] as const;

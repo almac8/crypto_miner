@@ -36,22 +36,11 @@ describe("World Map", () => {
   describe("Mining", () => {
     it("Should decrease the minable value for the specific cell", async () => {
       const { worldMap } = await loadFixture(deployWorldMapFixture);
-      const cellIndexToMine = 0;
-/* 
-      for(let i = 0; i < worldSize; i++) {
-        expect(await worldMap.minableValue(i)).to.equal(1000);
-      }
+      expect(await worldMap.getMinableValue(0, 0)).to.equal(1000);
+      
+      await worldMap.mineTile(0, 0);
 
-      await worldMap.mineCell(cellIndexToMine);
-
-      for(let i = 0; i < worldSize; i++) {
-        if(i === cellIndexToMine) {
-          expect(await worldMap.minableValue(i)).to.equal(999);
-        } else {
-          expect(await worldMap.minableValue(i)).to.equal(1000);
-        }
-      }
-       */
+      expect(await worldMap.getMinableValue(0, 0)).to.equal(999);
     });
   });
 });

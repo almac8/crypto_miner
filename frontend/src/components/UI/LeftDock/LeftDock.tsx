@@ -9,6 +9,10 @@ const LeftDock = () => {
 
   const toggleIsLocked = () => setIsLocked(!isLocked);
 
+  const mineSelectedTile = () => {
+    console.log(`Mine ${ JSON.stringify(sceneDataContext.selectedTile) }`);
+  }
+
   return (
     <div
     id="LeftDock"
@@ -23,10 +27,11 @@ const LeftDock = () => {
             <div>
               <p>Selected Tile: { `(${ sceneDataContext.selectedTile.x }, ${ sceneDataContext.selectedTile.y })` }</p>
               <p>Tile Value: { sceneDataContext.minableValues[sceneDataContext.selectedTile.x][sceneDataContext.selectedTile.x] }</p>
+              <button onClick={ mineSelectedTile }>Mine</button>
             </div>
           )}
 
-          {<button onClick={ toggleIsLocked }>{ isLocked ? "Unlock" : "Lock" }</button>}
+          <button onClick={ toggleIsLocked }>{ isLocked ? "Unlock" : "Lock" }</button>
         </div>
       )}
     </div>
