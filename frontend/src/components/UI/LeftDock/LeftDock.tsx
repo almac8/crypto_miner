@@ -15,10 +15,20 @@ const LeftDock = () => {
     className={ isOpen ? "UI_Dock_Open" : "UI_Dock_Closed" }
     onMouseEnter={ () => !isLocked && setIsOpen(true) }
     onMouseLeave={ () => !isLocked && setIsOpen(false) }>
-      {isOpen && <p>World Dimentions: ({ sceneDataContext.worldDimentions.x }, { sceneDataContext.worldDimentions.y })</p>}
-      {isOpen && sceneDataContext.selectedTile !== undefined && <p>Selected Cell: { `(${ sceneDataContext.selectedTile.x }, ${ sceneDataContext.selectedTile.y })` }</p>}
-      {isOpen && sceneDataContext.selectedTile !== undefined && <p>Value: { sceneDataContext.minableValues[sceneDataContext.selectedTile.x][sceneDataContext.selectedTile.x] }</p>}
-      {isOpen && <button onClick={ toggleIsLocked }>{ isLocked ? "Unlock" : "Lock" }</button>}
+      {isOpen && (
+        <div>
+          <p>World Dimentions: ({ sceneDataContext.worldDimentions.x }, { sceneDataContext.worldDimentions.y })</p>
+
+          {sceneDataContext.selectedTile !== undefined && (
+            <div>
+              <p>Selected Tile: { `(${ sceneDataContext.selectedTile.x }, ${ sceneDataContext.selectedTile.y })` }</p>
+              <p>Tile Value: { sceneDataContext.minableValues[sceneDataContext.selectedTile.x][sceneDataContext.selectedTile.x] }</p>
+            </div>
+          )}
+
+          {<button onClick={ toggleIsLocked }>{ isLocked ? "Unlock" : "Lock" }</button>}
+        </div>
+      )}
     </div>
   );
 };
