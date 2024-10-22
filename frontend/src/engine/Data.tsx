@@ -18,8 +18,8 @@ type SceneData = {
   worldDimentions: Vector2,
   setWorldDimentions: Dispatch<SetStateAction<Vector2>>,
   
-  selectedCell: number | undefined,
-  setSelectedCell: Dispatch<SetStateAction<number | undefined>>
+  selectedTile: Vector2 | undefined,
+  setSelectedTile: Dispatch<SetStateAction<Vector2 | undefined>>
 };
 
 type SceneDataProviderProps = {
@@ -42,8 +42,8 @@ let sceneData: SceneData = {
   worldDimentions: new Vector2(),
   setWorldDimentions: () => {},
 
-  selectedCell: undefined,
-  setSelectedCell: () => {}
+  selectedTile: undefined,
+  setSelectedTile: () => {}
 };
 
 const SceneDataContext = createContext(sceneData);
@@ -54,8 +54,8 @@ const SceneDataProvider = (props: SceneDataProviderProps) => {
   const [ mousePosition, setMousePosition ] = useState<Vector2>(new Vector2());
   const [ clickEvents, setClickEvents ] = useState<ClickEvent[]>([] as ClickEvent[]);
   const [ worldDimentions, setWorldDimentions ] = useState<Vector2>(new Vector2());
-  const [ selectedCell, setSelectedCell ] = useState<number | undefined>(undefined);
-
+  const [ selectedTile, setSelectedTile ] = useState<Vector2 | undefined>(undefined);
+  
   sceneData.renderingContext = renderingContext;
   sceneData.setRenderingContext = setRenderingContext;
 
@@ -71,8 +71,8 @@ const SceneDataProvider = (props: SceneDataProviderProps) => {
   sceneData.worldDimentions = worldDimentions;
   sceneData.setWorldDimentions = setWorldDimentions;
 
-  sceneData.selectedCell = selectedCell;
-  sceneData.setSelectedCell = setSelectedCell;
+  sceneData.selectedTile = selectedTile;
+  sceneData.setSelectedTile = setSelectedTile;
   
   return (
     <SceneDataContext.Provider value={{
@@ -81,7 +81,7 @@ const SceneDataProvider = (props: SceneDataProviderProps) => {
       mousePosition, setMousePosition,
       clickEvents, setClickEvents,
       worldDimentions, setWorldDimentions,
-      selectedCell, setSelectedCell }}>
+      selectedTile, setSelectedTile }}>
       { props.children }
     </SceneDataContext.Provider>
   );

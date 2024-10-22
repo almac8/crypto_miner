@@ -8,7 +8,12 @@ const worldMapABI = [
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "size",
+        "name": "worldWidth",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "worldHeight",
         "type": "uint256"
       }
     ],
@@ -19,11 +24,16 @@ const worldMapABI = [
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "cellIndex",
+        "name": "x",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "y",
         "type": "uint256"
       }
     ],
-    "name": "minableValue",
+    "name": "getMinableValue",
     "outputs": [
       {
         "internalType": "uint256",
@@ -35,26 +45,13 @@ const worldMapABI = [
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "cellIndex",
-        "type": "uint256"
-      }
-    ],
-    "name": "mineCell",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "inputs": [],
-    "name": "worldSize",
+    "name": "getWorldDimentions",
     "outputs": [
       {
-        "internalType": "uint256",
+        "internalType": "uint256[]",
         "name": "",
-        "type": "uint256"
+        "type": "uint256[]"
       }
     ],
     "stateMutability": "view",

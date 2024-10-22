@@ -28,10 +28,24 @@ class Vector2 {
     );
   }
 
+  multiplyVector(v2: Vector2) {
+    return new Vector2(
+      this.x * v2.x,
+      this.y * v2.y
+    );
+  }
+
   divide(magnitude: number) {
     return new Vector2(
       this.x / magnitude,
       this.y / magnitude
+    );
+  }
+
+  divideVector(v2: Vector2) {
+    return new Vector2(
+      this.x / v2.x,
+      this.y / v2.y
     );
   }
 }

@@ -3,17 +3,21 @@ import "./LeftDock.css";
 import { SceneDataContext } from "../../../engine/Data";
 
 const LeftDock = () => {
-  const [ isOpen, setIsOpen ] = useState(false);
   const sceneDataContext = useContext(SceneDataContext);
+  const [ isOpen, setIsOpen ] = useState(false);
+  const [ isLocked, setIsLocked ] = useState(false);
+
+  const toggleIsLocked = () => setIsLocked(!isLocked);
 
   return (
     <div
     id="LeftDock"
     className={ isOpen ? "UI_Dock_Open" : "UI_Dock_Closed" }
-    onMouseEnter={ () => setIsOpen(true) }
-    onMouseLeave={ () => setIsOpen(false) }>
-      {isOpen && <p>World Dimentions: ({ sceneDataContext.worldSize.x }, { sceneDataContext.worldSize.y })</p>}
-      {isOpen && sceneDataContext.selectedCell !== undefined && <p>Selected Cell: { sceneDataContext.selectedCell }</p>}
+    onMouseEnter={ () => !isLocked && setIsOpen(true) }
+    onMouseLeave={ () => !isLocked && setIsOpen(false) }>
+      {isOpen && <p>World Dimentions: ({ sceneDataContext.worldDimentions.x }, { sceneDataContext.worldDimentions.y })</p>}
+      {isOpen && sceneDataContext.selectedTile !== undefined && <p>Selected Cell: { `(${ sceneDataContext.selectedTile.x }, ${ sceneDataContext.selectedTile.y })` }</p>}
+      {isOpen && <button onClick={ toggleIsLocked }>{ isLocked ? "Unlock" : "Lock" }</button>}
     </div>
   );
 };

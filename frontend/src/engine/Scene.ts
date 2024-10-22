@@ -8,23 +8,26 @@ class Scene {
 
   constructor() {
     this.tilemap = new TileMap(new Vector2(), 0);
+    
+    worldMapContract.read.getWorldDimentions().then(result => {
+      const worldDimentions = new Vector2(Number(result[0]), Number(result[1]));
+      sceneData.setWorldDimentions(worldDimentions);
 
-    worldMapContract.read.worldSize()
-      .then(result => {
-        const worldDimentions = new Vector2(Number(result), Number(result));
-        sceneData.setWorldDimentions(worldDimentions);
-
-        return worldDimentions;
-      })
-      .then(worldDimentions => {
-        this.tilemap = new TileMap(worldDimentions, 50);
-      });
-
+      return worldDimentions;
+    }).then(worldDimentions => {
+      this.tilemap = new TileMap(worldDimentions, 50);
+    });
   }
 
   update(deltatime: number) {
-    sceneData.clickEvents.forEach(ce => {
-      console.log(`X: ${ ce.position.x }, Y: ${ ce.position.y }`);
+    sceneData.clickEvents.forEach(e => {
+      const tileIndex = this.tilemap.getTileIndexAtPixel(e.position);
+
+      if(tileIndex.x !== -1 && tileIndex.y !== -1) {
+        sceneData.setSelectedTile(tileIndex);
+      } else {
+        sceneData.setSelectedTile(undefined);
+      }
     });
 
     sceneData.setClickEvents([]);

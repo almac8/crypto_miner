@@ -5,21 +5,27 @@ class TileMap {
   dimentions: Vector2;
   tilePixelDepth: number;
 
+  private canvasCenter: Vector2;
+  private mapPixelDepth: Vector2;
+  private mapCenter: Vector2;
+  private mapOffset: Vector2;
+
   constructor(dimentions: Vector2, tilePixelDepth: number) {
     this.dimentions = dimentions;
     this.tilePixelDepth = tilePixelDepth;
+
+    this.canvasCenter = sceneData.canvasDimentions.divide(2);
+    this.mapPixelDepth = this.dimentions.multiply(this.tilePixelDepth);
+    this.mapCenter = this.mapPixelDepth.divide(2);
+    this.mapOffset = this.canvasCenter.subtract(this.mapCenter);
   }
   
   render() {
     if(sceneData.renderingContext) {
-      const canvasCenter = sceneData.canvasDimentions.divide(2);
-      const mapCenter = this.dimentions.multiply(this.tilePixelDepth).divide(2);
-      const mapOffset = canvasCenter.subtract(mapCenter);
-
       for(let y = 0; y < this.dimentions.y; y++) {
         for(let x = 0; x < this.dimentions.x; x++) {
           let tilePosition = new Vector2(x, y).multiply(this.tilePixelDepth);
-          tilePosition = tilePosition.add(mapOffset);
+          tilePosition = tilePosition.add(this.mapOffset);
 
           sceneData.renderingContext.beginPath();
           sceneData.renderingContext.fillStyle = "olive";
@@ -29,9 +35,20 @@ class TileMap {
           sceneData.renderingContext.stroke();
           sceneData.renderingContext.fill();
         }
+      }
     }
+  }
 
-    }
+  getTileIndexAtPixel(pixelPosition: Vector2) {
+    const pixelOffset = pixelPosition.subtract(this.mapOffset);
+    const rawIndex = pixelOffset.divide(this.tilePixelDepth);
+    const flooredIndex = new Vector2(Math.floor(rawIndex.x), Math.floor(rawIndex.y));
+    
+    let clampedIndex = flooredIndex;
+    clampedIndex.x = (clampedIndex.x < 0 || clampedIndex.x >= this.dimentions.x) ? -1 : clampedIndex.x;
+    clampedIndex.y = (clampedIndex.y < 0 || clampedIndex.y >= this.dimentions.y) ? -1 : clampedIndex.y;
+
+    return clampedIndex;
   }
 }
 

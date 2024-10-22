@@ -3,11 +3,12 @@ import hre from "hardhat";
 import { loadFixture } from "@nomicfoundation/hardhat-toolbox/network-helpers";
 
 describe("World Map", () => {
-  const worldSize = 4;
+  const worldWidth = 8;
+  const worldHeight = 4;
 
   async function deployWorldMapFixture() {
     const WorldMap = await hre.ethers.getContractFactory("WorldMap");
-    const worldMap = await WorldMap.deploy(worldSize);
+    const worldMap = await WorldMap.deploy(worldWidth, worldHeight);
 
     return { worldMap };
   };
@@ -15,15 +16,19 @@ describe("World Map", () => {
   describe("Deployment", () => {
     it("Should deploy with a fixed size", async () => {
       const { worldMap } = await loadFixture(deployWorldMapFixture);
-
-      expect(await worldMap.worldSize()).to.equal(worldSize);
+      
+      const worldDimentions = await worldMap.getWorldDimentions();
+      expect(worldDimentions[0]).to.equal(worldWidth);
+      expect(worldDimentions[1]).to.equal(worldHeight);
     });
 
     it("Should return a minable value for each cell", async () => {
       const { worldMap } = await loadFixture(deployWorldMapFixture);
 
-      for(let i = 0; i < worldSize; i++) {
-        expect(await worldMap.minableValue(i)).to.equal(1000);
+      for(let y = 0; y < worldHeight; y++) {
+        for(let x = 0; x < worldWidth; x++) {
+          expect(await worldMap.getMinableValue(x, y)).to.equal(1000);
+        }
       }
     });
   });
@@ -32,7 +37,7 @@ describe("World Map", () => {
     it("Should decrease the minable value for the specific cell", async () => {
       const { worldMap } = await loadFixture(deployWorldMapFixture);
       const cellIndexToMine = 0;
-
+/* 
       for(let i = 0; i < worldSize; i++) {
         expect(await worldMap.minableValue(i)).to.equal(1000);
       }
@@ -46,6 +51,7 @@ describe("World Map", () => {
           expect(await worldMap.minableValue(i)).to.equal(1000);
         }
       }
+       */
     });
   });
 });
