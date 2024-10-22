@@ -19,7 +19,10 @@ type SceneData = {
   setWorldDimentions: Dispatch<SetStateAction<Vector2>>,
   
   selectedTile: Vector2 | undefined,
-  setSelectedTile: Dispatch<SetStateAction<Vector2 | undefined>>
+  setSelectedTile: Dispatch<SetStateAction<Vector2 | undefined>>,
+
+  minableValues: number[][],
+  setMinableValues: Dispatch<SetStateAction<number[][]>>
 };
 
 type SceneDataProviderProps = {
@@ -43,7 +46,10 @@ let sceneData: SceneData = {
   setWorldDimentions: () => {},
 
   selectedTile: undefined,
-  setSelectedTile: () => {}
+  setSelectedTile: () => {},
+
+  minableValues: [] as number[][],
+  setMinableValues: () => {}
 };
 
 const SceneDataContext = createContext(sceneData);
@@ -55,6 +61,7 @@ const SceneDataProvider = (props: SceneDataProviderProps) => {
   const [ clickEvents, setClickEvents ] = useState<ClickEvent[]>([] as ClickEvent[]);
   const [ worldDimentions, setWorldDimentions ] = useState<Vector2>(new Vector2());
   const [ selectedTile, setSelectedTile ] = useState<Vector2 | undefined>(undefined);
+  const [ minableValues, setMinableValues ] = useState<number[][]>([]);
   
   sceneData.renderingContext = renderingContext;
   sceneData.setRenderingContext = setRenderingContext;
@@ -73,6 +80,9 @@ const SceneDataProvider = (props: SceneDataProviderProps) => {
 
   sceneData.selectedTile = selectedTile;
   sceneData.setSelectedTile = setSelectedTile;
+
+  sceneData.minableValues = minableValues;
+  sceneData.setMinableValues = setMinableValues;
   
   return (
     <SceneDataContext.Provider value={{
@@ -81,7 +91,8 @@ const SceneDataProvider = (props: SceneDataProviderProps) => {
       mousePosition, setMousePosition,
       clickEvents, setClickEvents,
       worldDimentions, setWorldDimentions,
-      selectedTile, setSelectedTile }}>
+      selectedTile, setSelectedTile,
+      minableValues, setMinableValues }}>
       { props.children }
     </SceneDataContext.Provider>
   );
